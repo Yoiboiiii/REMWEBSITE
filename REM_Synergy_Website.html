@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --green:#1a56db;
+  --green-light:#eef3ff;
+  --green-mid:#224299;
+  --navy:#1a2332;
+  --navy-light:#2d3f52;
+  --text:#1a2332;
+  --muted:#5a6a7a;
+  --border:#e4e8f0;
+  --bg:#f7f8fc;
+  --white:#ffffff;
+}
+body{font-family:'DM Sans',sans-serif;color:var(--text);background:var(--white);font-size:15px;line-height:1.6}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.97);border-bottom:1px solid var(--border);padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-logo{display:flex;align-items:center;gap:10px}
+.nav-logo img{height:40px;object-fit:contain}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{text-decoration:none;color:var(--muted);font-size:14px;font-weight:400;letter-spacing:0.02em;cursor:pointer;transition:color 0.2s}
+.nav-links a:hover,.nav-links a.active{color:var(--green)}
+.nav-cta{background:var(--green);color:white!important;padding:8px 20px;border-radius:4px;font-size:13px!important;font-weight:500!important;transition:background 0.2s!important}
+.nav-cta:hover{background:var(--green-mid)!important;color:white!important}
+
+/* ── HAMBURGER (mobile) ── */
+.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+.nav-hamburger span{display:block;width:22px;height:2px;background:var(--navy);border-radius:2px;transition:all 0.3s}
+
+/* ── MOBILE NAV ── */
+@media(max-width:768px){
+  nav{padding:0 20px}
+  .nav-hamburger{display:flex}
+  .nav-links{display:none;position:fixed;top:64px;left:0;right:0;background:white;flex-direction:column;gap:0;border-bottom:1px solid var(--border);z-index:99;box-shadow:0 4px 12px rgba(0,0,0,0.08)}
+  .nav-links.open{display:flex}
+  .nav-links a{padding:14px 20px;border-bottom:1px solid var(--border);font-size:15px;width:100%}
+  .nav-cta{margin:12px 20px;border-radius:4px;text-align:center;width:auto}
+}
+
+.page{display:none;padding-top:64px}
+.page.active{display:block}
+.page-bg{background-color:var(--white);background-image:radial-gradient(circle,#d0d8e8 1px,transparent 1px);background-size:28px 28px;background-attachment:fixed}
+.divider{height:1px;background:var(--border);margin:0 40px}
+.section-label{font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--green);margin-bottom:12px}
+.section-title{font-family:'DM Serif Display',serif;font-size:32px;color:var(--navy);margin-bottom:8px}
+.section-sub{color:var(--muted);font-size:15px;font-weight:300;margin-bottom:40px}
+
+/* ── HOME ── */
+.hero{padding:80px 40px 72px;max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.hero-eyebrow{font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--green);margin-bottom:16px}
+.hero h1{font-family:'DM Serif Display',serif;font-size:44px;line-height:1.15;color:var(--navy);margin-bottom:20px}
+.hero h1 em{font-style:italic;color:var(--green)}
+.hero-desc{color:var(--muted);font-size:16px;line-height:1.7;margin-bottom:32px;font-weight:300}
+.hero-actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.btn-primary{background:var(--green);color:white;padding:11px 24px;border-radius:4px;font-size:14px;font-weight:500;cursor:pointer;border:none;transition:background 0.2s}
+.btn-primary:hover{background:var(--green-mid)}
+.btn-ghost{color:var(--green);font-size:14px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:6px}
+.btn-ghost:hover{opacity:0.75}
+.hero-visual{background:var(--green-light);border-radius:12px;padding:32px;border:1px solid var(--border)}
+.hero-card{background:white;border-radius:8px;padding:20px;border:1px solid var(--border);margin-bottom:12px}
+.hero-card:last-child{margin-bottom:0}
+.hero-card-label{font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:var(--green);font-weight:500;margin-bottom:4px}
+.hero-card-val{font-size:20px;font-weight:500;color:var(--navy)}
+.hero-card-sub{font-size:12px;color:var(--muted);margin-top:2px}
+.hero-cards-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.services-strip{padding:60px 40px;max-width:1100px;margin:0 auto}
+.services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.svc-card{background:white;padding:28px 24px;transition:background 0.2s;cursor:pointer}
+.svc-card:hover{background:var(--green-light)}
+.svc-icon{width:36px;height:36px;background:var(--green-light);border-radius:6px;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.svc-icon svg{width:18px;height:18px;stroke:var(--green);fill:none;stroke-width:1.5}
+.svc-card h3{font-size:14px;font-weight:500;color:var(--navy);margin-bottom:8px;line-height:1.3}
+.svc-card p{font-size:13px;color:var(--muted);line-height:1.5;font-weight:300}
+.stats-band{background:var(--navy);padding:48px 40px}
+.stats-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:40px}
+.stat-item{text-align:center}
+.stat-num{font-family:'DM Serif Display',serif;font-size:40px;color:white;margin-bottom:4px}
+.stat-label{font-size:13px;color:rgba(255,255,255,0.5);font-weight:300;letter-spacing:0.04em}
+.collab-section{padding:60px 40px;max-width:1100px;margin:0 auto}
+.collab-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.collab-card{border:1px solid var(--border);border-radius:8px;padding:24px 28px;background:white}
+.collab-tag{font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--green);margin-bottom:8px}
+.collab-card h3{font-size:15px;font-weight:500;color:var(--navy);margin-bottom:6px}
+.collab-card p{font-size:13px;color:var(--muted);font-weight:300;line-height:1.6}
+
+/* ── ABOUT ── */
+.about-hero{padding:72px 40px 56px;max-width:1100px;margin:0 auto}
+.about-hero h1{font-family:'DM Serif Display',serif;font-size:40px;color:var(--navy);margin-bottom:16px}
+.about-hero p{color:var(--muted);font-size:16px;font-weight:300;line-height:1.7;max-width:600px}
+.about-grid{padding:0 40px 60px;max-width:1100px;margin:0 auto;display:grid;grid-template-columns:3fr 2fr;gap:60px}
+.about-body p{color:var(--muted);font-size:15px;line-height:1.8;font-weight:300;margin-bottom:20px}
+.about-body h2{font-family:'DM Serif Display',serif;font-size:24px;color:var(--navy);margin:32px 0 12px}
+.vmv-stack{display:flex;flex-direction:column;gap:16px}
+.vmv-card{background:var(--bg);border-left:3px solid var(--green);padding:16px 20px;border-radius:0 6px 6px 0}
+.vmv-card h4{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:0.1em;color:var(--green);margin-bottom:4px}
+.vmv-card p{font-size:13px;color:var(--muted);line-height:1.6;font-weight:300}
+.commit-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:0}
+.commit-card{border:1px solid var(--border);border-radius:8px;padding:20px;background:white}
+.commit-card h4{font-size:14px;font-weight:500;color:var(--navy);margin-bottom:6px}
+.commit-card p{font-size:13px;color:var(--muted);line-height:1.5;font-weight:300}
+
+/* ── SERVICES ── */
+.services-hero{padding:72px 40px 56px;max-width:1100px;margin:0 auto}
+.services-hero h1{font-family:'DM Serif Display',serif;font-size:40px;color:var(--navy);margin-bottom:16px}
+.services-hero p{color:var(--muted);font-size:16px;font-weight:300;max-width:560px;line-height:1.7}
+.services-full{padding:0 40px 60px;max-width:1100px;margin:0 auto;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.svc-row{display:grid;grid-template-columns:2fr 3fr;background:white;border-bottom:1px solid var(--border)}
+.svc-row:last-child{border-bottom:none}
+.svc-left{padding:32px;border-right:1px solid var(--border)}
+.svc-num{font-size:11px;font-weight:500;color:var(--green);letter-spacing:0.1em;margin-bottom:8px}
+.svc-left h3{font-family:'DM Serif Display',serif;font-size:20px;color:var(--navy);line-height:1.3}
+.svc-right{padding:32px}
+.svc-right p{font-size:14px;color:var(--muted);line-height:1.7;font-weight:300;margin-bottom:16px}
+.svc-tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{background:var(--green-light);color:var(--green);font-size:11px;font-weight:500;padding:4px 10px;border-radius:3px;letter-spacing:0.04em}
+
+/* ── NEWS ── */
+.news-hero{padding:72px 40px 48px;max-width:1100px;margin:0 auto}
+.news-hero h1{font-family:'DM Serif Display',serif;font-size:40px;color:var(--navy);margin-bottom:16px}
+.news-hero p{color:var(--muted);font-size:16px;font-weight:300;max-width:520px;line-height:1.7}
+.news-filters{padding:0 40px 32px;max-width:1100px;margin:0 auto;display:flex;gap:8px;flex-wrap:wrap}
+.filter-btn{padding:7px 16px;border-radius:4px;font-size:13px;font-weight:400;cursor:pointer;border:1px solid var(--border);background:white;color:var(--muted);transition:all 0.2s;font-family:'DM Sans',sans-serif}
+.filter-btn:hover{border-color:var(--green);color:var(--green)}
+.filter-btn.active{background:var(--green);color:white;border-color:var(--green)}
+.news-grid{padding:0 40px 60px;max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.news-card{background:white;border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:border-color 0.2s;cursor:pointer}
+.news-card:hover{border-color:#a0b4d0}
+.news-card-top{padding:24px 24px 0}
+.news-meta{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.news-badge{font-size:10px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;padding:3px 10px;border-radius:3px}
+.badge-announcement{background:#eef3ff;color:var(--green)}
+.badge-project{background:#eaf6f0;color:#0f6e56}
+.badge-training{background:#fdf3e3;color:#854f0b}
+.news-date{font-size:12px;color:var(--muted);font-weight:300}
+.news-card h3{font-size:16px;font-weight:500;color:var(--navy);line-height:1.4;margin-bottom:10px}
+.news-card p{font-size:13px;color:var(--muted);line-height:1.6;font-weight:300;margin-bottom:20px}
+.news-card-footer{border-top:1px solid var(--border);padding:14px 24px;display:flex;align-items:center;justify-content:space-between}
+.news-author{font-size:12px;color:var(--muted);font-weight:300}
+.news-read{font-size:12px;color:var(--green);font-weight:500}
+.news-featured{grid-column:1/-1;display:grid;grid-template-columns:3fr 2fr;border:1px solid var(--border);border-radius:10px;overflow:hidden;background:white;cursor:pointer;transition:border-color 0.2s}
+.news-featured:hover{border-color:#a0b4d0}
+.news-featured-body{padding:32px}
+.news-featured-img{background:var(--green-light);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;padding:32px}
+.news-featured-img svg{width:48px;height:48px;stroke:var(--green);fill:none;stroke-width:1}
+.news-featured-img span{font-size:12px;color:var(--green);font-weight:500;letter-spacing:0.06em;text-transform:uppercase}
+.news-featured .news-badge{display:inline-block;margin-bottom:16px}
+.news-featured h2{font-family:'DM Serif Display',serif;font-size:26px;color:var(--navy);line-height:1.3;margin-bottom:12px}
+.news-featured p{font-size:14px;color:var(--muted);line-height:1.7;font-weight:300;margin-bottom:20px}
+.news-featured-meta{font-size:12px;color:var(--muted);font-weight:300}
+
+/* ── CONTACT ── */
+.contact-hero{padding:72px 40px 56px;max-width:1100px;margin:0 auto}
+.contact-hero h1{font-family:'DM Serif Display',serif;font-size:40px;color:var(--navy);margin-bottom:16px}
+.contact-hero p{color:var(--muted);font-size:16px;font-weight:300;max-width:500px;line-height:1.7}
+.contact-grid{padding:0 40px 40px;max-width:1100px;margin:0 auto;display:grid;grid-template-columns:2fr 3fr;gap:48px}
+.contact-info{display:flex;flex-direction:column;gap:20px}
+.contact-item{display:flex;gap:14px;align-items:flex-start}
+.contact-icon{width:36px;height:36px;background:var(--green-light);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.contact-icon svg{width:16px;height:16px;stroke:var(--green);fill:none;stroke-width:1.5}
+.contact-item h4{font-size:13px;font-weight:500;color:var(--navy);margin-bottom:2px}
+.contact-item p{font-size:13px;color:var(--muted);font-weight:300;line-height:1.5}
+.contact-form{display:flex;flex-direction:column;gap:14px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-group{display:flex;flex-direction:column;gap:5px}
+.form-group label{font-size:12px;font-weight:500;color:var(--navy);letter-spacing:0.03em}
+.form-group input,.form-group textarea,.form-group select{border:1px solid var(--border);border-radius:4px;padding:9px 12px;font-size:13px;font-family:'DM Sans',sans-serif;color:var(--text);background:var(--white);outline:none;transition:border-color 0.2s}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--green)}
+.form-group textarea{resize:vertical;min-height:100px;line-height:1.5}
+.form-submit{background:var(--green);color:white;border:none;padding:11px 28px;border-radius:4px;font-size:14px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;align-self:flex-start;transition:background 0.2s}
+.form-submit:hover{background:var(--green-mid)}
+
+/* Google Maps */
+.map-section{padding:0 40px 60px;max-width:1100px;margin:0 auto}
+.map-section h3{font-family:'DM Serif Display',serif;font-size:22px;color:var(--navy);margin-bottom:16px}
+.map-wrap{border-radius:10px;overflow:hidden;border:1px solid var(--border)}
+.map-wrap iframe{width:100%;height:340px;border:none;display:block}
+
+/* ── FOOTER ── */
+footer{background:var(--navy);padding:40px;color:rgba(255,255,255,0.5);font-size:13px;font-weight:300}
+.footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.footer-brand{font-family:'DM Serif Display',serif;font-size:18px;color:white;margin-bottom:4px}
+.footer-links{display:flex;gap:24px;flex-wrap:wrap}
+.footer-links a{color:rgba(255,255,255,0.4);text-decoration:none;font-size:13px;cursor:pointer;transition:color 0.2s}
+.footer-links a:hover{color:rgba(255,255,255,0.8)}
+
+/* ── WHATSAPP FLOATING BUTTON ── */
+.wa-float{position:fixed;bottom:28px;right:28px;z-index:999;width:54px;height:54px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(37,211,102,0.4);cursor:pointer;transition:transform 0.2s,box-shadow 0.2s;text-decoration:none}
+.wa-float:hover{transform:scale(1.08);box-shadow:0 6px 20px rgba(37,211,102,0.5)}
+.wa-float svg{width:28px;height:28px;fill:white}
+.wa-tooltip{position:fixed;bottom:38px;right:90px;z-index:998;background:var(--navy);color:white;font-size:12px;font-weight:500;padding:6px 12px;border-radius:4px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity 0.2s;font-family:'DM Sans',sans-serif}
+.wa-float:hover+.wa-tooltip{opacity:1}
+
+/* ── BACK TO TOP ── */
+.back-top{position:fixed;bottom:92px;right:28px;z-index:998;width:40px;height:40px;border-radius:50%;background:var(--navy);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 10px rgba(0,0,0,0.2);opacity:0;pointer-events:none;transition:opacity 0.3s,transform 0.2s}
+.back-top.visible{opacity:1;pointer-events:all}
+.back-top:hover{transform:translateY(-2px)}
+.back-top svg{width:16px;height:16px;stroke:white;fill:none;stroke-width:2.5}
+
+/* ── MOBILE RESPONSIVE ── */
+@media(max-width:768px){
+  .divider{margin:0 20px}
+  .hero{grid-template-columns:1fr;padding:40px 20px;gap:32px}
+  .hero h1{font-size:32px}
+  .hero-visual{display:none}
+  .services-strip{padding:40px 20px}
+  .section-title{font-size:26px}
+  .services-grid{grid-template-columns:1fr 1fr}
+  .stats-band{padding:32px 20px}
+  .stats-inner{grid-template-columns:1fr 1fr;gap:24px}
+  .stat-num{font-size:28px}
+  .collab-section{padding:40px 20px}
+  .collab-grid{grid-template-columns:1fr}
+  .about-hero{padding:40px 20px 32px}
+  .about-hero h1{font-size:30px}
+  .about-grid{grid-template-columns:1fr;padding:0 20px 40px;gap:32px}
+  .commit-grid{grid-template-columns:1fr}
+  .services-hero{padding:40px 20px 32px}
+  .services-hero h1{font-size:30px}
+  .services-full{padding:0 20px 40px;border-left:none;border-right:none;border-radius:0}
+  .svc-row{grid-template-columns:1fr}
+  .svc-left{border-right:none;border-bottom:1px solid var(--border);padding:20px}
+  .svc-right{padding:20px}
+  .news-hero{padding:40px 20px 32px}
+  .news-hero h1{font-size:30px}
+  .news-filters{padding:0 20px 24px}
+  .news-grid{grid-template-columns:1fr;padding:0 20px 40px}
+  .news-featured{grid-template-columns:1fr}
+  .news-featured-img{display:none}
+  .contact-hero{padding:40px 20px 32px}
+  .contact-hero h1{font-size:30px}
+  .contact-grid{grid-template-columns:1fr;padding:0 20px 32px;gap:32px}
+  .form-row{grid-template-columns:1fr}
+  .map-section{padding:0 20px 40px}
+  .map-wrap iframe{height:240px}
+  footer{padding:32px 20px}
+  .footer-inner{flex-direction:column;align-items:flex-start}
+  .wa-float{bottom:20px;right:20px}
+  .back-top{bottom:84px;right:20px}
+}
+@media(max-width:480px){
+  .services-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <img src="LOGO_REM.png" height="45" alt="REM Synergy">
+  </div>
+  <div class="nav-links" id="nav-links">
+    <a onclick="showPage('home');closeMenu()" class="active" id="nav-home">Home</a>
+    <a onclick="showPage('about');closeMenu()" id="nav-about">About</a>
+    <a onclick="showPage('services');closeMenu()" id="nav-services">Services</a>
+    <a onclick="showPage('news');closeMenu()" id="nav-news">News</a>
+    <a onclick="showPage('contact');closeMenu()" id="nav-contact" class="nav-cta">Contact Us</a>
+  </div>
+  <button class="nav-hamburger" onclick="toggleMenu()" id="hamburger">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- WHATSAPP BUTTON -->
+<a class="wa-float" href="https://wa.me/60142540109" target="_blank">
+  <svg viewBox="0 0 32 32"><path d="M16 1C7.716 1 1 7.716 1 16c0 2.628.672 5.1 1.852 7.256L1 31l7.94-1.82A14.94 14.94 0 0 0 16 31c8.284 0 15-6.716 15-15S24.284 1 16 1zm0 27.4a12.34 12.34 0 0 1-6.3-1.72l-.452-.268-4.712 1.08 1.112-4.596-.296-.472A12.4 12.4 0 1 1 16 28.4zm6.8-9.272c-.372-.188-2.204-1.088-2.544-1.212-.34-.124-.588-.188-.836.188-.248.376-.964 1.212-1.18 1.46-.216.248-.436.28-.808.092-.372-.188-1.572-.58-2.996-1.848-1.108-.988-1.856-2.208-2.072-2.58-.216-.372-.024-.572.164-.76.168-.168.372-.436.56-.652.188-.216.248-.372.372-.62.124-.248.062-.464-.032-.652-.092-.188-.836-2.016-1.148-2.76-.3-.724-.608-.624-.836-.636l-.712-.012c-.248 0-.652.092-.992.464-.34.372-1.3 1.272-1.3 3.1 0 1.828 1.332 3.596 1.52 3.844.188.248 2.624 4.008 6.356 5.62.888.384 1.58.612 2.12.784.892.284 1.704.244 2.344.148.716-.108 2.204-.9 2.516-1.768.312-.868.312-1.612.216-1.768-.092-.156-.34-.248-.712-.436z"/></svg>
+</a>
+<div class="wa-tooltip">Chat with us on WhatsApp</div>
+
+<!-- BACK TO TOP -->
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+
+<!-- HOME PAGE -->
+<div class="page active page-bg" id="page-home">
+  <div class="hero">
+    <div>
+      <div class="hero-eyebrow">Anything want to put ? — Malaysia</div>
+      <h1>Who <em>We Are</em> </h1>
+      <p class="hero-desc">Consulting, training and on-site technical support in Radiation Protection, Environmental Health & Safety, ISO Standards, and Industrial Best Practices.</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="showPage('services')">Our Services</button>
+        <a class="btn-ghost" onclick="showPage('contact')">Get in touch →</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-cards-row">
+        <div class="hero-card"><div class="hero-card-label">Est.</div><div class="hero-card-val">2017</div><div class="hero-card-sub">Incorporated in Malaysia</div></div>
+        <div class="hero-card"><div class="hero-card-label">Scope</div><div class="hero-card-val">4 Fields</div><div class="hero-card-sub">Integrated expertise</div></div>
+      </div>
+      <div style="height:12px"></div>
+      <div class="hero-card"><div class="hero-card-label">Sectors Served</div><div class="hero-card-val"> ·  · Manufacturing · </div></div>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="services-strip">
+    <div class="section-label">What We Do</div>
+    <div class="section-title">Our core service areas</div>
+    <div class="section-sub">Comprehensive technical support across four specialised disciplines.</div>
+    <div class="services-grid">
+      <div class="svc-card"><div class="svc-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg></div><h3>Radiation Protection & Nuclear Safety</h3><p>Regulatory compliance, site assessments, and on-site technical support for nuclear and radioactive facilities.</p></div>
+      <div class="svc-card"><div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><h3>Environmental Health & Safety (EHS)</h3><p>Environmental monitoring, risk assessment, and EHS management system implementation.</p></div>
+      <div class="svc-card"><div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div><h3>ISO Standards & Industrial Standards</h3><p>Consultancy and training for ISO 9001, 14001, 45001 and other management system standards.</p></div>
+      <div class="svc-card"><div class="svc-icon"><svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div><h3>Industrial Best Practices & Sustainable Systems</h3><p>Sustainable system management, NORM waste management, and manufacturing best practices.</p></div>
+    </div>
+  </div>
+  <div class="stats-band">
+    <div class="stats-inner">
+      <div class="stat-item"><div class="stat-num">2017</div><div class="stat-label">Year Founded</div></div>
+      <div class="stat-item"><div class="stat-num">4+</div><div class="stat-label">Service Disciplines</div></div>
+      <div class="stat-item"><div class="stat-num">2</div><div class="stat-label">International Collaborations</div></div>
+      <div class="stat-item"><div class="stat-num">Gov & Private</div><div class="stat-label">Sectors Served</div></div>
+    </div>
+  </div>
+  <div class="collab-section">
+    <div class="section-label">Collaborations</div>
+    <div class="section-title">International partnerships</div>
+    <div class="section-sub">Working with global experts to deliver world-class solutions in Malaysia.</div>
+    <div class="collab-grid">
+      <div class="collab-card"><div class="collab-tag">Nuclear Safety & Security</div><h3>IanScott IntelTech Sdn Bhd (UK–Malaysia)</h3><p>Physical security systems and surveillance equipment for government, private, and radioactive/nuclear facilities.</p></div>
+      <div class="collab-card"><div class="collab-tag">NORM Waste Management</div><h3>GeoEnergy Consult (Germany)</h3><p>Specialised management of industrial waste containing Naturally Occurring Radioactive Material (NORM).</p></div>
+    </div>
+  </div>
+  <footer><div class="footer-inner"><div><div class="footer-brand">REM Synergy Sdn Bhd</div><div>© 2026 REM Synergy Sdn Bhd. All rights reserved.</div></div><div class="footer-links"><a onclick="showPage('home')">Home</a><a onclick="showPage('about')">About</a><a onclick="showPage('services')">Services</a><a onclick="showPage('news')">News</a><a onclick="showPage('contact')">Contact</a></div></div></footer>
+</div>
+
+<!-- ABOUT PAGE -->
+<div class="page page-bg" id="page-about">
+  <div class="about-hero"><div class="section-label">Who We Are</div><h1>Technical expertise for<br>a sustainable future</h1><p>REM Synergy Sdn Bhd began as a radiological and environmental consulting company and has grown into a full-spectrum technical services provider for Malaysian industry.</p></div>
+  <div class="divider"></div>
+  <div class="about-grid" style="margin-top:40px">
+    <div class="about-body">
+      <h2>Our Background</h2>
+      <p>REM Synergy Sdn Bhd, formerly known as REM Consultants Sdn Bhd, was incorporated in 2017, initially as a radiological and environmental consulting company. Throughout the years, the company expanded its scope of services to regulatory compliance consultancy and on-site technical support.</p>
+      <p>Today, REM provides consultancy, training and on-site support services to various government and private companies including mining and minerals, manufacturing, oil & gas, as well as research and education institutions across Malaysia.</p>
+      <h2>Our Commitments</h2>
+      <div class="commit-grid">
+        <div class="commit-card"><h4>Integrity</h4><p>We practice the values of integrity, objectivity and professionalism in delivering our services.</p></div>
+        <div class="commit-card"><h4>Environment</h4><p>We minimise environmental impact of our operations while complying with relevant rules and regulations.</p></div>
+        <div class="commit-card"><h4>Safety & Health</h4><p>We comply with applicable safety and health rules and procedures in all our work.</p></div>
+        <div class="commit-card"><h4>Service Quality</h4><p>We deliver quality service within the specified time frame, meeting clients' needs and expectations.</p></div>
+      </div>
+    </div>
+    <div>
+      <div class="vmv-stack">
+        <div class="vmv-card"><h4>Vision</h4><p>To become a technical service provider of choice for enabling sustainable development in Malaysian industry.</p></div>
+        <div class="vmv-card"><h4>Mission</h4><p>To provide professional service and on-site support to all clients with customer-focused solutions to fulfilling global and national requirements.</p></div>
+        <div class="vmv-card"><h4>Our Value</h4><p>We put honesty above all else and work hard to demonstrate commitment in all aspects of our work.</p></div>
+      </div>
+    </div>
+  </div>
+  <footer><div class="footer-inner"><div><div class="footer-brand">REM Synergy Sdn Bhd</div><div>© 2026 REM Synergy Sdn Bhd. All rights reserved.</div></div><div class="footer-links"><a onclick="showPage('home')">Home</a><a onclick="showPage('about')">About</a><a onclick="showPage('services')">Services</a><a onclick="showPage('news')">News</a><a onclick="showPage('contact')">Contact</a></div></div></footer>
+</div>
+
+<!-- SERVICES PAGE -->
+<div class="page page-bg" id="page-services">
+  <div class="services-hero"><div class="section-label">Services</div><h1>What we offer</h1><p>From radiation protection to ISO certification, our team delivers expert consulting, training, and on-site technical support.</p></div>
+  <div class="divider"></div>
+  <div style="padding:40px 40px 60px;max-width:1100px;margin:0 auto">
+    <div class="services-full">
+      <div class="svc-row"><div class="svc-left"><div class="svc-num">01</div><h3>Radiation Protection & Nuclear Safety and Security</h3></div><div class="svc-right"><p>Comprehensive consultancy and on-site technical support covering regulatory compliance with national and international nuclear safety standards. We assist facilities in establishing radiation protection programmes, conducting dose assessments, and ensuring physical security for nuclear and radioactive materials.</p><div class="svc-tags"><span class="tag">Dose Assessment</span><span class="tag">Regulatory Compliance</span><span class="tag">Security Systems</span><span class="tag">NORM Management</span></div></div></div>
+      <div class="svc-row"><div class="svc-left"><div class="svc-num">02</div><h3>Environmental Health & Safety (EHS)</h3></div><div class="svc-right"><p>End-to-end EHS management services including environmental monitoring, risk assessments, and development of EHS management systems. We help organisations identify, evaluate, and control environmental and occupational health hazards in compliance with Malaysian regulations.</p><div class="svc-tags"><span class="tag">Environmental Monitoring</span><span class="tag">Risk Assessment</span><span class="tag">EHS Management</span><span class="tag">Regulatory Compliance</span></div></div></div>
+      <div class="svc-row"><div class="svc-left"><div class="svc-num">03</div><h3>ISO Standards & Industrial Standards</h3></div><div class="svc-right"><p>Consultancy and training services for ISO management system standards. We guide organisations through the full implementation cycle — from gap analysis and documentation to internal audits and certification readiness — for ISO 9001, ISO 14001, ISO 45001 and other relevant standards.</p><div class="svc-tags"><span class="tag">ISO 9001</span><span class="tag">ISO 14001</span><span class="tag">ISO 45001</span><span class="tag">Gap Analysis</span><span class="tag">Internal Audit</span></div></div></div>
+      <div class="svc-row"><div class="svc-left"><div class="svc-num">04</div><h3>Industrial Best Practices & Sustainable Systems</h3></div><div class="svc-right"><p>Training and consultancy on sustainable system management and manufacturing best practices aligned with industry and regulatory expectations.</p><div class="svc-tags"><span class="tag">Sustainable Systems</span><span class="tag">Best Practices</span><span class="tag">Training</span><span class="tag">Waste Management</span></div></div></div>
+    </div>
+  </div>
+  <footer><div class="footer-inner"><div><div class="footer-brand">REM Synergy Sdn Bhd</div><div>© 2026 REM Synergy Sdn Bhd. All rights reserved.</div></div><div class="footer-links"><a onclick="showPage('home')">Home</a><a onclick="showPage('about')">About</a><a onclick="showPage('services')">Services</a><a onclick="showPage('news')">News</a><a onclick="showPage('contact')">Contact</a></div></div></footer>
+</div>
+
+<!-- NEWS PAGE -->
+<div class="page page-bg" id="page-news">
+  <div class="news-hero">
+    <div class="section-label">Latest Updates</div>
+    <h1>News & Announcements</h1>
+    <p>Stay updated with REM Synergy's latest company announcements, project milestones, and upcoming training programmes.</p>
+  </div>
+  <div class="divider"></div>
+  <div class="news-filters">
+    <button class="filter-btn active" onclick="filterNews('all',this)">All</button>
+    <button class="filter-btn" onclick="filterNews('announcement',this)">Announcements</button>
+    <button class="filter-btn" onclick="filterNews('project',this)">Project Updates</button>
+    <button class="filter-btn" onclick="filterNews('training',this)">Training</button>
+  </div>
+  <div class="news-grid" id="news-grid">
+    <div class="news-featured" data-cat="announcement">
+      <div class="news-featured-body">
+        <span class="news-badge badge-announcement">Announcement</span>
+        <h2>REM Synergy rebrands from REM Consultants Sdn Bhd</h2>
+        <p>We are pleased to announce that our company has officially rebranded to REM Synergy Sdn Bhd, reflecting our expanded scope of services and commitment to integrated technical solutions across Malaysia.</p>
+        <div class="news-featured-meta">May 2026 · REM Synergy Team</div>
+      </div>
+      <div class="news-featured-img">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        <span>Featured</span>
+      </div>
+    </div>
+    <div class="news-card" data-cat="project">
+      <div class="news-card-top">
+        <div class="news-meta"><span class="news-badge badge-project">Project Update</span><span class="news-date">April 2026</span></div>
+        <h3>Project A</h3>
+        <p>Our technical team successfully completed on-site .</p>
+      </div>
+      <div class="news-card-footer"><span class="news-author">REM Technical Team</span><span class="news-read">Read more →</span></div>
+    </div>
+    <div class="news-card" data-cat="training">
+      <div class="news-card-top">
+        <div class="news-meta"><span class="news-badge badge-training">Training</span><span class="news-date">March 2026</span></div>
+        <h3>Training A — June 2026</h3>
+        <p>Upcoming Training A .</p>
+      </div>
+      <div class="news-card-footer"><span class="news-author">REM Training Division</span><span class="news-read">Register now →</span></div>
+    </div>
+    <div class="news-card" data-cat="announcement">
+      <div class="news-card-top">
+        <div class="news-meta"><span class="news-badge badge-announcement">Announcement</span><span class="news-date">February 2026</span></div>
+        <h3>REM Synergy renews collaboration agreement with GeoEnergy Consult Germany</h3>
+        <p>We have renewed our strategic partnership with GeoEnergy Consult for NORM waste management services, strengthening our capability to serve the oil & gas and mining sectors.</p>
+      </div>
+      <div class="news-card-footer"><span class="news-author">REM Synergy Management</span><span class="news-read">Read more →</span></div>
+    </div>
+    <div class="news-card" data-cat="project">
+      <div class="news-card-top">
+        <div class="news-meta"><span class="news-badge badge-project">Project Update</span><span class="news-date">December 2025</span></div>
+        <h3>TRX Integrated Management Systems</h3>
+        <p>REM Synergy guided a TRXC client through full IMS implementation covering ISO 9001, ISO 14001, and ISO 45001.</p>
+      </div>
+      <div class="news-card-footer"><span class="news-author">REM Consulting Team</span><span class="news-read">Read more →</span></div>
+    </div>
+    <div class="news-card" data-cat="training">
+      <div class="news-card-top">
+        <div class="news-meta"><span class="news-badge badge-training">Training</span><span class="news-date">December 2025</span></div>
+        <h3>Training B </h3>
+        <p>Upcoming Training B .</p>
+      </div>
+      <div class="news-card-footer"><span class="news-author">REM Training Division</span><span class="news-read">Read more →</span></div>
+    </div>
+  </div>
+  <footer><div class="footer-inner"><div><div class="footer-brand">REM Synergy Sdn Bhd</div><div>© 2026 REM Synergy Sdn Bhd. All rights reserved.</div></div><div class="footer-links"><a onclick="showPage('home')">Home</a><a onclick="showPage('about')">About</a><a onclick="showPage('services')">Services</a><a onclick="showPage('news')">News</a><a onclick="showPage('contact')">Contact</a></div></div></footer>
+</div>
+
+<!-- CONTACT PAGE -->
+<div class="page page-bg" id="page-contact">
+  <div class="contact-hero"><div class="section-label">Get In Touch</div><h1>Let's work together</h1><p>Reach out to discuss your compliance, training, or consultancy needs. Our team is ready to assist.</p></div>
+  <div class="divider"></div>
+  <div class="contact-grid" style="margin-top:40px">
+    <div class="contact-info">
+      <div class="contact-item"><div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.44 2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.85a16 16 0 0 0 6 6l.85-.85a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z"/></svg></div><div><h4>Phone</h4><p>+603-6142 3311</p></div></div>
+      <div class="contact-item"><div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><h4>Email</h4><p>admin@remconsult.com.my</p></div></div>
+      <div class="contact-item"><div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><h4>Location</h4><p>43-2, Jalan Cecawi 6/33, Seksyen 6, Kota Damansara, 47810 Petaling Jaya, Selangor, MALAYSIA</p></div></div>
+      <div class="contact-item"><div class="contact-icon"><svg viewBox="0 0 32 32"><path fill="white" d="M16 1C7.716 1 1 7.716 1 16c0 2.628.672 5.1 1.852 7.256L1 31l7.94-1.82A14.94 14.94 0 0 0 16 31c8.284 0 15-6.716 15-15S24.284 1 16 1zm6.8 18.128c-.372-.188-2.204-1.088-2.544-1.212-.34-.124-.588-.188-.836.188-.248.376-.964 1.212-1.18 1.46-.216.248-.436.28-.808.092-.372-.188-1.572-.58-2.996-1.848-1.108-.988-1.856-2.208-2.072-2.58-.216-.372-.024-.572.164-.76.168-.168.372-.436.56-.652.188-.216.248-.372.372-.62.124-.248.062-.464-.032-.652-.092-.188-.836-2.016-1.148-2.76-.3-.724-.608-.624-.836-.636l-.712-.012c-.248 0-.652.092-.992.464-.34.372-1.3 1.272-1.3 3.1 0 1.828 1.332 3.596 1.52 3.844.188.248 2.624 4.008 6.356 5.62.888.384 1.58.612 2.12.784.892.284 1.704.244 2.344.148.716-.108 2.204-.9 2.516-1.768.312-.868.312-1.612.216-1.768-.092-.156-.34-.248-.712-.436z"/></svg></div><div><h4>WhatsApp</h4><p><a href="https://wa.me/60361423311" target="_blank" style="color:var(--green);text-decoration:none">+603-6142 3311</a></p></div></div>
+    </div>
+    <div class="contact-form">
+      <div class="form-row">
+        <div class="form-group"><label>Full Name</label><input type="text" placeholder="Your name"></div>
+        <div class="form-group"><label>Email Address</label><input type="email" placeholder="you@company.com"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Company</label><input type="text" placeholder="Organisation name"></div>
+        <div class="form-group"><label>Service Interest</label><select><option value="">Select a service...</option><option>Radiation Protection & Nuclear Safety</option><option>Environmental Health & Safety (EHS)</option><option>ISO Standards Consultancy</option><option>Industrial Best Practices</option><option>Training</option></select></div>
+      </div>
+      <div class="form-group"><label>Message</label><textarea placeholder="Tell us about your project or requirements..."></textarea></div>
+      <button class="form-submit">Send Message</button>
+    </div>
+  </div>
+
+  <!-- GOOGLE MAPS -->
+  <div class="map-section">
+    <h3>Find Us</h3>
+    <div class="map-wrap">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3984.171!2d101.5776!3d3.1598!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cc4e000000001%3A0x1!2sJalan%20Cecawi%206%2F33%2C%20Kota%20Damansara%2C%2047810%20Petaling%20Jaya%2C%20Selangor!5e0!3m2!1sen!2smy!4v1" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+
+  <footer style="margin-top:20px"><div class="footer-inner"><div><div class="footer-brand">REM Synergy Sdn Bhd</div><div>© 2026 REM Synergy Sdn Bhd. All rights reserved.</div></div><div class="footer-links"><a onclick="showPage('home')">Home</a><a onclick="showPage('about')">About</a><a onclick="showPage('services')">Services</a><a onclick="showPage('news')">News</a><a onclick="showPage('contact')">Contact</a></div></div></footer>
+</div>
+
+<script>
+function showPage(name){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
+  document.getElementById('page-'+name).classList.add('active');
+  document.getElementById('nav-'+name).classList.add('active');
+  window.scrollTo(0,0);
+}
+function filterNews(cat,btn){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('#news-grid > *').forEach(card=>{
+    if(cat==='all'||card.dataset.cat===cat){card.style.display=''}
+    else{card.style.display='none'}
+  });
+}
+function toggleMenu(){
+  document.getElementById('nav-links').classList.toggle('open');
+}
+function closeMenu(){
+  document.getElementById('nav-links').classList.remove('open');
+}
+window.addEventListener('scroll',()=>{
+  document.getElementById('backTop').classList.toggle('visible',window.scrollY>300);
+});
+</script>
+</body>
+</html>
