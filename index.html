@@ -3,279 +3,249 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --blue:#1a56db;
-  --blue-light:rgba(255,255,255,0.15);
-  --blue-mid:#224299;
-  --navy:#0d1b2e;
-  --text:#ffffff;
-  --muted:rgba(255,255,255,0.7);
-  --border:rgba(255,255,255,0.18);
-  --card-bg:rgba(255,255,255,0.1);
-  --card-hover:rgba(255,255,255,0.18);
+  --cream:#f5f2ee;
+  --warm-white:#faf9f7;
+  --sand:#e8e2d9;
+  --stone:#c8bfb2;
+  --bark:#8c7b6e;
+  --ink:#2a2420;
+  --ink-light:#4a3f38;
+  --muted:#9a8f88;
+  --border:#ddd8d0;
+  --accent:#5a6e4a;
   --white:#ffffff;
-  --input-bg:rgba(255,255,255,0.12);
 }
-
-/* ── GRAINY BLUE GRADIENT BACKGROUND ── */
-body{
-  font-family:'DM Sans',sans-serif;
-  color:var(--text);
-  font-size:15px;
-  line-height:1.6;
-  background:#1a3a6e;
-}
-.page-bg{
-  position:relative;
-  background:linear-gradient(135deg,#0f2a5e 0%,#1a4a8a 30%,#2a7ab5 60%,#c8dff0 100%);
-  min-height:100vh;
-}
-.page-bg::before{
-  content:'';
-  position:fixed;
-  inset:0;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E");
-  background-size:200px 200px;
-  pointer-events:none;
-  z-index:0;
-  opacity:0.5;
-}
-.page-bg > *{position:relative;z-index:1}
+body{font-family:'Noto Sans',sans-serif;color:var(--ink);background:var(--warm-white);font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased}
 
 /* ── NAV ── */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,25,60,0.75);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,0.12);padding:0 40px;display:flex;align-items:center;justify-content:space-between;height: 75;px}
-.nav-logo img{height:65px;object-fit:contain;filter:brightness(0) invert(1);}
-.nav-links{display:flex;gap:28px;align-items:center}
-.nav-links a{text-decoration:none;color:rgba(255,255,255,0.65);font-size:14px;font-weight:400;letter-spacing:0.02em;cursor:pointer;transition:color 0.2s}
-.nav-links a:hover,.nav-links a.active{color:white}
-.nav-cta{background:rgba(255,255,255,0.15)!important;color:white!important;padding:8px 20px;border-radius:4px;font-size:13px!important;font-weight:500!important;border:1px solid rgba(255,255,255,0.3)!important;transition:background 0.2s!important;backdrop-filter:blur(8px)}
-.nav-cta:hover{background:rgba(255,255,255,0.25)!important}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,249,247,0.97);border-bottom:1px solid var(--border);padding:0 48px;display:flex;align-items:center;justify-content:space-between;height:60px}
+.nav-logo img{height:36px;object-fit:contain}
+.nav-logo-text{font-family:'Noto Serif',serif;font-size:15px;color:var(--ink);letter-spacing:0.04em}
+.nav-links{display:flex;gap:32px;align-items:center}
+.nav-links a{text-decoration:none;color:var(--muted);font-size:13px;font-weight:400;letter-spacing:0.06em;cursor:pointer;transition:color 0.2s;text-transform:uppercase}
+.nav-links a:hover,.nav-links a.active{color:var(--ink)}
+.nav-cta{color:var(--ink)!important;border:1px solid var(--ink)!important;padding:6px 18px;font-size:12px!important;letter-spacing:0.08em!important;transition:all 0.2s!important;background:transparent!important}
+.nav-cta:hover{background:var(--ink)!important;color:var(--white)!important}
 .nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
-.nav-hamburger span{display:block;width:22px;height:2px;background:white;border-radius:2px;transition:all 0.3s}
+.nav-hamburger span{display:block;width:20px;height:1px;background:var(--ink);transition:all 0.3s}
 
 @media(max-width:768px){
   nav{padding:0 20px}
   .nav-hamburger{display:flex}
-  .nav-links{display:none;position:fixed;top:64px;left:0;right:0;background:rgba(10,25,60,0.95);backdrop-filter:blur(20px);flex-direction:column;gap:0;border-bottom:1px solid rgba(255,255,255,0.12);z-index:99}
+  .nav-links{display:none;position:fixed;top:60px;left:0;right:0;background:var(--warm-white);flex-direction:column;gap:0;border-bottom:1px solid var(--border);z-index:99}
   .nav-links.open{display:flex}
-  .nav-links a{padding:14px 20px;border-bottom:1px solid rgba(255,255,255,0.08);font-size:15px;width:100%}
-  .nav-cta{margin:12px 20px;width:auto;text-align:center}
+  .nav-links a{padding:16px 24px;border-bottom:1px solid var(--border);font-size:13px;width:100%}
+  .nav-cta{margin:16px 24px;width:auto;text-align:center}
 }
 
-.page{display:none;padding-top:64px}
+.page{display:none;padding-top:60px}
 .page.active{display:block}
+.page-bg{background:var(--warm-white)}
 
-.divider{height:1px;background:rgba(255,255,255,0.15);margin:0 40px}
-.section-label{font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:12px}
-.section-title{font-family:'DM Serif Display',serif;font-size:32px;color:white;margin-bottom:8px}
-.section-sub{color:rgba(255,255,255,0.6);font-size:15px;font-weight:300;margin-bottom:40px}
-
-/* ── GLASS CARD ── */
-.glass{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.18);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-radius:12px}
-.glass-sm{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);backdrop-filter:blur(8px);border-radius:8px}
+.divider{height:1px;background:var(--border);margin:0 48px}
+.section-label{font-size:10px;font-weight:400;letter-spacing:0.2em;text-transform:uppercase;color:var(--stone);margin-bottom:16px}
+.section-title{font-family:'Noto Serif',serif;font-size:28px;font-weight:300;color:var(--ink);margin-bottom:10px;line-height:1.3}
+.section-sub{color:var(--muted);font-size:14px;font-weight:300;margin-bottom:48px;line-height:1.7}
 
 /* ── HOME HERO ── */
-.hero{padding:80px 40px 72px;max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
-.hero-eyebrow{font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:16px}
-.hero h1{font-family:'DM Serif Display',serif;font-size:44px;line-height:1.15;color:white;margin-bottom:20px}
-.hero h1 em{font-style:italic;color:#90c8f0}
-.hero-desc{color:rgba(255,255,255,0.7);font-size:16px;line-height:1.7;margin-bottom:32px;font-weight:300}
-.hero-actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-.btn-primary{background:white;color:#1a3a6e;padding:11px 24px;border-radius:4px;font-size:14px;font-weight:500;cursor:pointer;border:none;transition:all 0.2s}
-.btn-primary:hover{background:rgba(255,255,255,0.85)}
-.btn-ghost{color:white;font-size:14px;font-weight:400;cursor:pointer;display:flex;align-items:center;gap:6px;opacity:0.8}
-.btn-ghost:hover{opacity:1}
-.hero-visual{border-radius:12px;padding:28px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);backdrop-filter:blur(12px)}
-.hero-card{background:rgba(255,255,255,0.1);border-radius:8px;padding:18px;border:1px solid rgba(255,255,255,0.15);margin-bottom:10px}
+.hero{padding:96px 48px 80px;max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.hero-eyebrow{font-size:10px;font-weight:400;letter-spacing:0.2em;text-transform:uppercase;color:var(--stone);margin-bottom:20px}
+.hero h1{font-family:'Noto Serif',serif;font-size:42px;line-height:1.2;color:var(--ink);margin-bottom:20px;font-weight:300}
+.hero h1 em{font-style:italic;color:var(--bark)}
+.hero-desc{color:var(--muted);font-size:15px;line-height:1.8;margin-bottom:36px;font-weight:300}
+.hero-actions{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.btn-primary{background:var(--ink);color:white;padding:11px 28px;font-size:13px;font-weight:400;cursor:pointer;border:none;letter-spacing:0.06em;transition:all 0.2s;font-family:'Noto Sans',sans-serif}
+.btn-primary:hover{background:var(--ink-light)}
+.btn-ghost{color:var(--muted);font-size:13px;font-weight:400;cursor:pointer;display:flex;align-items:center;gap:6px;letter-spacing:0.04em;border-bottom:1px solid var(--stone);padding-bottom:1px;transition:all 0.2s}
+.btn-ghost:hover{color:var(--ink);border-color:var(--ink)}
+.hero-visual{background:var(--cream);padding:32px;border:1px solid var(--border)}
+.hero-card{background:var(--white);padding:20px 24px;border:1px solid var(--border);margin-bottom:8px}
 .hero-card:last-child{margin-bottom:0}
-.hero-card-label{font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.5);font-weight:500;margin-bottom:4px}
-.hero-card-val{font-size:18px;font-weight:500;color:white}
-.hero-card-sub{font-size:12px;color:rgba(255,255,255,0.5);margin-top:2px}
-.hero-cards-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.hero-card-label{font-size:9px;text-transform:uppercase;letter-spacing:0.18em;color:var(--stone);font-weight:400;margin-bottom:6px}
+.hero-card-val{font-family:'Noto Serif',serif;font-size:18px;font-weight:300;color:var(--ink)}
+.hero-card-sub{font-size:12px;color:var(--muted);margin-top:3px}
+.hero-cards-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 
-/* ── SERVICES STRIP ── */
-.services-strip{padding:60px 40px;max-width:1100px;margin:0 auto}
-.services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.svc-card{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:10px;padding:28px 22px;transition:all 0.2s;cursor:pointer;backdrop-filter:blur(8px)}
-.svc-card:hover{background:rgba(255,255,255,0.16);transform:translateY(-2px)}
-.svc-icon{width:36px;height:36px;background:rgba(255,255,255,0.15);border-radius:6px;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
-.svc-icon svg{width:18px;height:18px;stroke:rgba(255,255,255,0.9);fill:none;stroke-width:1.5}
-.svc-card h3{font-size:14px;font-weight:500;color:white;margin-bottom:8px;line-height:1.3}
-.svc-card p{font-size:13px;color:rgba(255,255,255,0.6);line-height:1.5;font-weight:300}
+/* ── SERVICES ── */
+.services-strip{padding:72px 48px;max-width:1100px;margin:0 auto}
+.services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border)}
+.svc-card{background:var(--warm-white);padding:32px 24px;transition:background 0.2s;cursor:pointer}
+.svc-card:hover{background:var(--cream)}
+.svc-num{font-size:10px;color:var(--stone);letter-spacing:0.1em;margin-bottom:20px;font-weight:400}
+.svc-card h3{font-family:'Noto Serif',serif;font-size:14px;font-weight:400;color:var(--ink);margin-bottom:12px;line-height:1.4}
+.svc-card p{font-size:12px;color:var(--muted);line-height:1.7;font-weight:300}
 
-/* ── STATS BAND ── */
-.stats-band{background:rgba(0,0,0,0.25);padding:48px 40px;border-top:1px solid rgba(255,255,255,0.1);border-bottom:1px solid rgba(255,255,255,0.1)}
+/* ── STATS ── */
+.stats-band{background:var(--ink);padding:56px 48px}
 .stats-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:40px}
 .stat-item{text-align:center}
-.stat-num{font-family:'DM Serif Display',serif;font-size:40px;color:white;margin-bottom:4px}
-.stat-label{font-size:13px;color:rgba(255,255,255,0.45);font-weight:300;letter-spacing:0.04em}
+.stat-num{font-family:'Noto Serif',serif;font-size:36px;font-weight:300;color:white;margin-bottom:8px}
+.stat-label{font-size:11px;color:rgba(255,255,255,0.4);font-weight:300;letter-spacing:0.1em;text-transform:uppercase}
 
 /* ── COLLAB ── */
-.collab-section{padding:60px 40px;max-width:1100px;margin:0 auto}
-.collab-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.collab-card{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:10px;padding:24px 28px;backdrop-filter:blur(8px)}
-.collab-tag{font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:8px}
-.collab-card h3{font-size:15px;font-weight:500;color:white;margin-bottom:6px}
-.collab-card p{font-size:13px;color:rgba(255,255,255,0.6);font-weight:300;line-height:1.6}
+.collab-section{padding:72px 48px;max-width:1100px;margin:0 auto}
+.collab-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border)}
+.collab-card{background:var(--warm-white);padding:32px 36px}
+.collab-tag{font-size:9px;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:var(--stone);margin-bottom:12px}
+.collab-card h3{font-family:'Noto Serif',serif;font-size:15px;font-weight:400;color:var(--ink);margin-bottom:8px}
+.collab-card p{font-size:13px;color:var(--muted);font-weight:300;line-height:1.7}
 
 /* ── ABOUT ── */
-.about-hero{padding:72px 40px 56px;max-width:1100px;margin:0 auto}
-.about-hero h1{font-family:'DM Serif Display',serif;font-size:40px;color:white;margin-bottom:16px}
-.about-hero p{color:rgba(255,255,255,0.7);font-size:16px;font-weight:300;line-height:1.7;max-width:600px}
-.about-grid{padding:0 40px 60px;max-width:1100px;margin:0 auto;display:grid;grid-template-columns:3fr 2fr;gap:60px}
-.about-body p{color:rgba(255,255,255,0.65);font-size:15px;line-height:1.8;font-weight:300;margin-bottom:20px}
-.about-body h2{font-family:'DM Serif Display',serif;font-size:24px;color:white;margin:32px 0 12px}
-.vmv-stack{display:flex;flex-direction:column;gap:14px}
-.vmv-card{background:rgba(255,255,255,0.08);border-left:3px solid rgba(255,255,255,0.5);padding:16px 20px;border-radius:0 8px 8px 0;backdrop-filter:blur(8px)}
-.vmv-card h4{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.5);margin-bottom:6px}
-.vmv-card p{font-size:13px;color:rgba(255,255,255,0.65);line-height:1.6;font-weight:300}
-.commit-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:0}
-.commit-card{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:8px;padding:20px;backdrop-filter:blur(6px)}
-.commit-card h4{font-size:14px;font-weight:500;color:white;margin-bottom:6px}
-.commit-card p{font-size:13px;color:rgba(255,255,255,0.6);line-height:1.5;font-weight:300}
+.about-hero{padding:80px 48px 60px;max-width:1100px;margin:0 auto}
+.about-hero h1{font-family:'Noto Serif',serif;font-size:38px;font-weight:300;color:var(--ink);margin-bottom:16px;line-height:1.3}
+.about-hero p{color:var(--muted);font-size:15px;font-weight:300;line-height:1.8;max-width:580px}
+.about-grid{padding:0 48px 72px;max-width:1100px;margin:0 auto;display:grid;grid-template-columns:3fr 2fr;gap:72px}
+.about-body p{color:var(--muted);font-size:14px;line-height:1.9;font-weight:300;margin-bottom:20px}
+.about-body h2{font-family:'Noto Serif',serif;font-size:22px;font-weight:300;color:var(--ink);margin:40px 0 16px}
+.vmv-stack{display:flex;flex-direction:column;gap:1px;background:var(--border)}
+.vmv-card{background:var(--warm-white);padding:20px 24px}
+.vmv-card h4{font-size:9px;font-weight:400;text-transform:uppercase;letter-spacing:0.18em;color:var(--stone);margin-bottom:8px}
+.vmv-card p{font-size:13px;color:var(--muted);line-height:1.7;font-weight:300}
+.commit-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);margin-top:0}
+.commit-card{background:var(--warm-white);padding:24px}
+.commit-card h4{font-family:'Noto Serif',serif;font-size:14px;font-weight:400;color:var(--ink);margin-bottom:8px}
+.commit-card p{font-size:12px;color:var(--muted);line-height:1.7;font-weight:300}
 
 /* ── SERVICES PAGE ── */
-.services-hero{padding:72px 40px 56px;max-width:1100px;margin:0 auto}
-.services-hero h1{font-family:'DM Serif Display',serif;font-size:40px;color:white;margin-bottom:16px}
-.services-hero p{color:rgba(255,255,255,0.65);font-size:16px;font-weight:300;max-width:560px;line-height:1.7}
-.services-full{padding:0 40px 60px;max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
-.svc-row{display:grid;grid-template-columns:2fr 3fr;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:10px;overflow:hidden;backdrop-filter:blur(8px)}
-.svc-left{padding:32px;border-right:1px solid rgba(255,255,255,0.12)}
-.svc-num{font-size:11px;font-weight:500;color:rgba(255,255,255,0.45);letter-spacing:0.1em;margin-bottom:8px}
-.svc-left h3{font-family:'DM Serif Display',serif;font-size:20px;color:white;line-height:1.3}
-.svc-right{padding:32px}
-.svc-right p{font-size:14px;color:rgba(255,255,255,0.65);line-height:1.7;font-weight:300;margin-bottom:16px}
+.services-hero{padding:80px 48px 60px;max-width:1100px;margin:0 auto}
+.services-hero h1{font-family:'Noto Serif',serif;font-size:38px;font-weight:300;color:var(--ink);margin-bottom:16px}
+.services-hero p{color:var(--muted);font-size:15px;font-weight:300;max-width:520px;line-height:1.8}
+.services-full{padding:0 48px 72px;max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:1px;background:var(--border)}
+.svc-row{display:grid;grid-template-columns:2fr 3fr;background:var(--warm-white)}
+.svc-left{padding:36px;border-right:1px solid var(--border)}
+.svc-num-lg{font-size:10px;font-weight:400;color:var(--stone);letter-spacing:0.15em;margin-bottom:12px}
+.svc-left h3{font-family:'Noto Serif',serif;font-size:18px;font-weight:400;color:var(--ink);line-height:1.4}
+.svc-right{padding:36px}
+.svc-right p{font-size:13px;color:var(--muted);line-height:1.8;font-weight:300;margin-bottom:16px}
 .svc-tags{display:flex;flex-wrap:wrap;gap:6px}
-.tag{background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.85);font-size:11px;font-weight:500;padding:4px 10px;border-radius:3px;letter-spacing:0.04em;border:1px solid rgba(255,255,255,0.15)}
+.tag{background:var(--cream);color:var(--bark);font-size:10px;font-weight:400;padding:4px 10px;letter-spacing:0.06em;border:1px solid var(--sand)}
 
 /* ── NEWS ── */
-.news-hero{padding:72px 40px 48px;max-width:1100px;margin:0 auto}
-.news-hero h1{font-family:'DM Serif Display',serif;font-size:40px;color:white;margin-bottom:16px}
-.news-hero p{color:rgba(255,255,255,0.65);font-size:16px;font-weight:300;max-width:520px;line-height:1.7}
-.news-filters{padding:0 40px 32px;max-width:1100px;margin:0 auto;display:flex;gap:8px;flex-wrap:wrap}
-.filter-btn{padding:7px 16px;border-radius:4px;font-size:13px;font-weight:400;cursor:pointer;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.65);transition:all 0.2s;font-family:'DM Sans',sans-serif;backdrop-filter:blur(6px)}
-.filter-btn:hover{border-color:rgba(255,255,255,0.5);color:white}
-.filter-btn.active{background:rgba(255,255,255,0.2);color:white;border-color:rgba(255,255,255,0.5)}
-.news-grid{padding:0 40px 60px;max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.news-card{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:10px;overflow:hidden;transition:all 0.2s;cursor:pointer;backdrop-filter:blur(8px)}
-.news-card:hover{background:rgba(255,255,255,0.14);transform:translateY(-2px)}
-.news-card-top{padding:24px 24px 0}
-.news-meta{display:flex;align-items:center;gap:10px;margin-bottom:12px}
-.news-badge{font-size:10px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;padding:3px 10px;border-radius:3px}
-.badge-announcement{background:rgba(100,160,255,0.2);color:#a8d0ff;border:1px solid rgba(100,160,255,0.3)}
-.badge-project{background:rgba(80,200,150,0.2);color:#90e0b8;border:1px solid rgba(80,200,150,0.3)}
-.badge-training{background:rgba(255,180,80,0.2);color:#ffd49a;border:1px solid rgba(255,180,80,0.3)}
-.news-date{font-size:12px;color:rgba(255,255,255,0.45);font-weight:300}
-.news-card h3{font-size:15px;font-weight:500;color:white;line-height:1.4;margin-bottom:10px}
-.news-card p{font-size:13px;color:rgba(255,255,255,0.6);line-height:1.6;font-weight:300;margin-bottom:20px}
-.news-card-footer{border-top:1px solid rgba(255,255,255,0.1);padding:14px 24px;display:flex;align-items:center;justify-content:space-between}
-.news-author{font-size:12px;color:rgba(255,255,255,0.4);font-weight:300}
-.news-read{font-size:12px;color:rgba(255,255,255,0.8);font-weight:500}
-.news-featured{grid-column:1/-1;display:grid;grid-template-columns:3fr 2fr;border:1px solid rgba(255,255,255,0.2);border-radius:12px;overflow:hidden;background:rgba(255,255,255,0.1);cursor:pointer;transition:all 0.2s;backdrop-filter:blur(10px)}
-.news-featured:hover{background:rgba(255,255,255,0.16)}
-.news-featured-body{padding:32px}
-.news-featured-img{background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;padding:32px;border-left:1px solid rgba(255,255,255,0.12)}
-.news-featured-img svg{width:48px;height:48px;stroke:rgba(255,255,255,0.5);fill:none;stroke-width:1}
-.news-featured-img span{font-size:12px;color:rgba(255,255,255,0.5);font-weight:500;letter-spacing:0.08em;text-transform:uppercase}
+.news-hero{padding:80px 48px 56px;max-width:1100px;margin:0 auto}
+.news-hero h1{font-family:'Noto Serif',serif;font-size:38px;font-weight:300;color:var(--ink);margin-bottom:16px}
+.news-hero p{color:var(--muted);font-size:15px;font-weight:300;max-width:480px;line-height:1.8}
+.news-filters{padding:0 48px 36px;max-width:1100px;margin:0 auto;display:flex;gap:0;flex-wrap:wrap;border-bottom:1px solid var(--border)}
+.filter-btn{padding:8px 20px;font-size:11px;font-weight:400;cursor:pointer;border:none;border-right:1px solid var(--border);background:transparent;color:var(--muted);transition:all 0.2s;font-family:'Noto Sans',sans-serif;letter-spacing:0.08em;text-transform:uppercase}
+.filter-btn:first-child{border-left:1px solid var(--border)}
+.filter-btn:hover{color:var(--ink);background:var(--cream)}
+.filter-btn.active{color:var(--ink);background:var(--cream)}
+.news-grid{padding:36px 48px 72px;max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border)}
+.news-card{background:var(--warm-white);overflow:hidden;transition:background 0.2s;cursor:pointer}
+.news-card:hover{background:var(--cream)}
+.news-card-top{padding:28px 28px 0}
+.news-meta{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.news-badge{font-size:9px;font-weight:400;letter-spacing:0.12em;text-transform:uppercase;padding:3px 8px}
+.badge-announcement{background:var(--cream);color:var(--bark);border:1px solid var(--sand)}
+.badge-project{background:#edf2e8;color:#4a6238;border:1px solid #c8dab8}
+.badge-training{background:#f5f0e8;color:#7a6040;border:1px solid #e0d0b8}
+.news-date{font-size:11px;color:var(--stone);font-weight:300;letter-spacing:0.04em}
+.news-card h3{font-family:'Noto Serif',serif;font-size:15px;font-weight:400;color:var(--ink);line-height:1.5;margin-bottom:10px}
+.news-card p{font-size:12px;color:var(--muted);line-height:1.7;font-weight:300;margin-bottom:20px}
+.news-card-footer{border-top:1px solid var(--border);padding:14px 28px;display:flex;align-items:center;justify-content:space-between}
+.news-author{font-size:11px;color:var(--stone);font-weight:300}
+.news-read{font-size:11px;color:var(--ink);font-weight:400;letter-spacing:0.04em}
+.news-featured{grid-column:1/-1;display:grid;grid-template-columns:3fr 2fr;background:var(--cream);cursor:pointer;transition:background 0.2s}
+.news-featured:hover{background:var(--sand)}
+.news-featured-body{padding:40px}
+.news-featured-img{background:var(--sand);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;padding:40px;border-left:1px solid var(--border)}
+.news-featured-img svg{width:40px;height:40px;stroke:var(--bark);fill:none;stroke-width:1}
+.news-featured-img span{font-size:10px;color:var(--bark);font-weight:400;letter-spacing:0.12em;text-transform:uppercase}
 .news-featured .news-badge{display:inline-block;margin-bottom:16px}
-.news-featured h2{font-family:'DM Serif Display',serif;font-size:26px;color:white;line-height:1.3;margin-bottom:12px}
-.news-featured p{font-size:14px;color:rgba(255,255,255,0.65);line-height:1.7;font-weight:300;margin-bottom:20px}
-.news-featured-meta{font-size:12px;color:rgba(255,255,255,0.4);font-weight:300}
+.news-featured h2{font-family:'Noto Serif',serif;font-size:24px;font-weight:300;color:var(--ink);line-height:1.4;margin-bottom:12px}
+.news-featured p{font-size:13px;color:var(--muted);line-height:1.8;font-weight:300;margin-bottom:20px}
+.news-featured-meta{font-size:11px;color:var(--stone);font-weight:300}
 
 /* ── CONTACT ── */
-.contact-hero{padding:72px 40px 56px;max-width:1100px;margin:0 auto}
-.contact-hero h1{font-family:'DM Serif Display',serif;font-size:40px;color:white;margin-bottom:16px}
-.contact-hero p{color:rgba(255,255,255,0.65);font-size:16px;font-weight:300;max-width:500px;line-height:1.7}
-.contact-grid{padding:0 40px 40px;max-width:1100px;margin:0 auto;display:grid;grid-template-columns:2fr 3fr;gap:48px}
-.contact-info{display:flex;flex-direction:column;gap:20px}
-.contact-item{display:flex;gap:14px;align-items:flex-start}
-.contact-icon{width:36px;height:36px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.contact-icon svg{width:16px;height:16px;stroke:rgba(255,255,255,0.8);fill:none;stroke-width:1.5}
-.contact-item h4{font-size:13px;font-weight:500;color:white;margin-bottom:2px}
-.contact-item p{font-size:13px;color:rgba(255,255,255,0.6);font-weight:300;line-height:1.5}
-.contact-form{display:flex;flex-direction:column;gap:14px}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.form-group{display:flex;flex-direction:column;gap:5px}
-.form-group label{font-size:12px;font-weight:500;color:rgba(255,255,255,0.7);letter-spacing:0.03em}
-.form-group input,.form-group textarea,.form-group select{border:1px solid rgba(255,255,255,0.2);border-radius:4px;padding:9px 12px;font-size:13px;font-family:'DM Sans',sans-serif;color:white;background:rgba(255,255,255,0.1);outline:none;transition:border-color 0.2s;backdrop-filter:blur(6px)}
-.form-group input::placeholder,.form-group textarea::placeholder{color:rgba(255,255,255,0.35)}
-.form-group select option{background:#1a3a6e;color:white}
-.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:rgba(255,255,255,0.5);background:rgba(255,255,255,0.15)}
-.form-group textarea{resize:vertical;min-height:100px;line-height:1.5}
-.form-submit{background:white;color:#1a3a6e;border:none;padding:11px 28px;border-radius:4px;font-size:14px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;align-self:flex-start;transition:all 0.2s}
-.form-submit:hover{background:rgba(255,255,255,0.85)}
-
-/* ── MAPS ── */
-.map-section{padding:0 40px 60px;max-width:1100px;margin:0 auto}
-.map-section h3{font-family:'DM Serif Display',serif;font-size:22px;color:white;margin-bottom:16px}
-.map-wrap{border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,0.15)}
-.map-wrap iframe{width:100%;height:340px;border:none;display:block}
+.contact-hero{padding:80px 48px 60px;max-width:1100px;margin:0 auto}
+.contact-hero h1{font-family:'Noto Serif',serif;font-size:38px;font-weight:300;color:var(--ink);margin-bottom:16px}
+.contact-hero p{color:var(--muted);font-size:15px;font-weight:300;max-width:480px;line-height:1.8}
+.contact-grid{padding:0 48px 48px;max-width:1100px;margin:0 auto;display:grid;grid-template-columns:2fr 3fr;gap:56px}
+.contact-info{display:flex;flex-direction:column;gap:24px}
+.contact-item{display:flex;gap:16px;align-items:flex-start;padding-bottom:24px;border-bottom:1px solid var(--border)}
+.contact-item:last-child{border-bottom:none}
+.contact-item h4{font-size:10px;font-weight:400;text-transform:uppercase;letter-spacing:0.15em;color:var(--stone);margin-bottom:4px}
+.contact-item p{font-size:13px;color:var(--ink-light);font-weight:300;line-height:1.6}
+.contact-form{display:flex;flex-direction:column;gap:16px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-group{display:flex;flex-direction:column;gap:6px}
+.form-group label{font-size:10px;font-weight:400;color:var(--stone);letter-spacing:0.12em;text-transform:uppercase}
+.form-group input,.form-group textarea,.form-group select{border:none;border-bottom:1px solid var(--border);padding:8px 0;font-size:13px;font-family:'Noto Sans',sans-serif;color:var(--ink);background:transparent;outline:none;transition:border-color 0.2s;border-radius:0}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--ink)}
+.form-group input::placeholder,.form-group textarea::placeholder{color:var(--stone)}
+.form-group textarea{resize:vertical;min-height:100px;line-height:1.6}
+.form-submit{background:var(--ink);color:white;border:none;padding:12px 32px;font-size:12px;font-weight:400;cursor:pointer;font-family:'Noto Sans',sans-serif;align-self:flex-start;letter-spacing:0.1em;text-transform:uppercase;transition:background 0.2s}
+.form-submit:hover{background:var(--ink-light)}
+.map-section{padding:0 48px 72px;max-width:1100px;margin:0 auto}
+.map-section h3{font-family:'Noto Serif',serif;font-size:20px;font-weight:300;color:var(--ink);margin-bottom:20px}
+.map-wrap{overflow:hidden;border:1px solid var(--border)}
+.map-wrap iframe{width:100%;height:320px;border:none;display:block}
 
 /* ── FOOTER ── */
-footer{background:rgba(0,0,0,0.35);padding:40px;border-top:1px solid rgba(255,255,255,0.1)}
-.footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
-.footer-brand{font-family:'DM Serif Display',serif;font-size:18px;color:white;margin-bottom:4px}
-.footer-copy{font-size:13px;color:rgba(255,255,255,0.35);font-weight:300}
-.footer-links{display:flex;gap:24px;flex-wrap:wrap}
-.footer-links a{color:rgba(255,255,255,0.35);text-decoration:none;font-size:13px;cursor:pointer;transition:color 0.2s}
-.footer-links a:hover{color:white}
+footer{background:var(--ink);padding:48px}
+.footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px}
+.footer-brand{font-family:'Noto Serif',serif;font-size:16px;font-weight:300;color:white;margin-bottom:4px;letter-spacing:0.04em}
+.footer-copy{font-size:11px;color:rgba(255,255,255,0.3);font-weight:300;letter-spacing:0.06em}
+.footer-links{display:flex;gap:28px;flex-wrap:wrap}
+.footer-links a{color:rgba(255,255,255,0.3);text-decoration:none;font-size:11px;cursor:pointer;transition:color 0.2s;letter-spacing:0.08em;text-transform:uppercase}
+.footer-links a:hover{color:rgba(255,255,255,0.8)}
 
 /* ── WHATSAPP ── */
-.wa-float{position:fixed;bottom:28px;right:28px;z-index:999;width:54px;height:54px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(37,211,102,0.4);cursor:pointer;transition:transform 0.2s,box-shadow 0.2s;text-decoration:none}
-.wa-float:hover{transform:scale(1.08)}
-.wa-float svg{width:28px;height:28px;fill:white}
-.wa-tooltip{position:fixed;bottom:38px;right:90px;z-index:998;background:rgba(0,0,0,0.7);color:white;font-size:12px;font-weight:500;padding:6px 12px;border-radius:4px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity 0.2s;font-family:'DM Sans',sans-serif;backdrop-filter:blur(8px)}
+.wa-float{position:fixed;bottom:28px;right:28px;z-index:999;width:50px;height:50px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 12px rgba(0,0,0,0.15);cursor:pointer;transition:transform 0.2s;text-decoration:none}
+.wa-float:hover{transform:scale(1.06)}
+.wa-float svg{width:26px;height:26px;fill:white}
+.wa-tooltip{position:fixed;bottom:36px;right:86px;z-index:998;background:var(--ink);color:white;font-size:11px;padding:6px 12px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity 0.2s;font-family:'Noto Sans',sans-serif;letter-spacing:0.04em}
 .wa-float:hover+.wa-tooltip{opacity:1}
 
 /* ── BACK TO TOP ── */
-.back-top{position:fixed;bottom:92px;right:28px;z-index:998;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 10px rgba(0,0,0,0.2);opacity:0;pointer-events:none;transition:opacity 0.3s,transform 0.2s;backdrop-filter:blur(8px)}
+.back-top{position:fixed;bottom:88px;right:28px;z-index:998;width:38px;height:38px;background:var(--warm-white);border:1px solid var(--border);cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.3s,transform 0.2s}
 .back-top.visible{opacity:1;pointer-events:all}
-.back-top:hover{transform:translateY(-2px);background:rgba(255,255,255,0.25)}
-.back-top svg{width:16px;height:16px;stroke:white;fill:none;stroke-width:2.5}
+.back-top:hover{transform:translateY(-2px);background:var(--cream)}
+.back-top svg{width:14px;height:14px;stroke:var(--ink);fill:none;stroke-width:2}
 
 /* ── MOBILE ── */
 @media(max-width:768px){
   .divider{margin:0 20px}
-  .hero{grid-template-columns:1fr;padding:40px 20px;gap:32px}
-  .hero h1{font-size:32px}
+  .hero{grid-template-columns:1fr;padding:48px 20px;gap:40px}
+  .hero h1{font-size:30px}
   .hero-visual{display:none}
-  .services-strip{padding:40px 20px}
-  .section-title{font-size:26px}
-  .services-grid{grid-template-columns:1fr 1fr;gap:10px}
-  .stats-band{padding:32px 20px}
-  .stats-inner{grid-template-columns:1fr 1fr;gap:24px}
+  .services-strip{padding:48px 20px}
+  .services-grid{grid-template-columns:1fr 1fr}
+  .section-title{font-size:22px}
+  .stats-band{padding:40px 20px}
+  .stats-inner{grid-template-columns:1fr 1fr;gap:28px}
   .stat-num{font-size:28px}
-  .collab-section{padding:40px 20px}
+  .collab-section{padding:48px 20px}
   .collab-grid{grid-template-columns:1fr}
-  .about-hero{padding:40px 20px 32px}
-  .about-hero h1{font-size:30px}
-  .about-grid{grid-template-columns:1fr;padding:0 20px 40px;gap:32px}
+  .about-hero{padding:48px 20px 40px}
+  .about-hero h1{font-size:28px}
+  .about-grid{grid-template-columns:1fr;padding:0 20px 48px;gap:40px}
   .commit-grid{grid-template-columns:1fr}
-  .services-hero{padding:40px 20px 32px}
-  .services-hero h1{font-size:30px}
-  .services-full{padding:0 20px 40px}
+  .services-hero{padding:48px 20px 40px}
+  .services-hero h1{font-size:28px}
+  .services-full{padding:0 20px 48px;gap:0}
   .svc-row{grid-template-columns:1fr}
-  .svc-left{border-right:none;border-bottom:1px solid rgba(255,255,255,0.1);padding:20px}
-  .svc-right{padding:20px}
-  .news-hero{padding:40px 20px 32px}
-  .news-hero h1{font-size:30px}
-  .news-filters{padding:0 20px 24px}
-  .news-grid{grid-template-columns:1fr;padding:0 20px 40px}
+  .svc-left{border-right:none;border-bottom:1px solid var(--border);padding:24px}
+  .svc-right{padding:24px}
+  .news-hero{padding:48px 20px 40px}
+  .news-hero h1{font-size:28px}
+  .news-filters{padding:0 20px 0}
+  .news-grid{grid-template-columns:1fr;padding:0 20px 48px;gap:1px}
   .news-featured{grid-template-columns:1fr}
   .news-featured-img{display:none}
-  .contact-hero{padding:40px 20px 32px}
-  .contact-hero h1{font-size:30px}
-  .contact-grid{grid-template-columns:1fr;padding:0 20px 32px;gap:32px}
+  .contact-hero{padding:48px 20px 40px}
+  .contact-hero h1{font-size:28px}
+  .contact-grid{grid-template-columns:1fr;padding:0 20px 40px;gap:40px}
   .form-row{grid-template-columns:1fr}
-  .map-section{padding:0 20px 40px}
+  .map-section{padding:0 20px 48px}
   .map-wrap iframe{height:240px}
-  footer{padding:32px 20px}
+  footer{padding:36px 20px}
   .footer-inner{flex-direction:column;align-items:flex-start}
   .wa-float{bottom:20px;right:20px}
-  .back-top{bottom:84px;right:20px}
+  .back-top{bottom:80px;right:20px}
 }
 @media(max-width:480px){
   .services-grid{grid-template-columns:1fr}
@@ -286,14 +256,14 @@ footer{background:rgba(0,0,0,0.35);padding:40px;border-top:1px solid rgba(255,25
 
 <nav>
   <div class="nav-logo">
-    <img src="LOGO_REM.png" height="45" alt="REM Synergy">
+    <img src="LOGO_REM.png" alt="REM Synergy">
   </div>
   <div class="nav-links" id="nav-links">
     <a onclick="showPage('home');closeMenu()" class="active" id="nav-home">Home</a>
     <a onclick="showPage('about');closeMenu()" id="nav-about">About</a>
     <a onclick="showPage('services');closeMenu()" id="nav-services">Services</a>
     <a onclick="showPage('news');closeMenu()" id="nav-news">News</a>
-    <a onclick="showPage('contact');closeMenu()" id="nav-contact" class="nav-cta">Contact Us</a>
+    <a onclick="showPage('contact');closeMenu()" id="nav-contact" class="nav-cta">Contact</a>
   </div>
   <button class="nav-hamburger" onclick="toggleMenu()">
     <span></span><span></span><span></span>
@@ -303,17 +273,17 @@ footer{background:rgba(0,0,0,0.35);padding:40px;border-top:1px solid rgba(255,25
 <a class="wa-float" href="https://wa.me/60142540109" target="_blank">
   <svg viewBox="0 0 32 32"><path d="M16 1C7.716 1 1 7.716 1 16c0 2.628.672 5.1 1.852 7.256L1 31l7.94-1.82A14.94 14.94 0 0 0 16 31c8.284 0 15-6.716 15-15S24.284 1 16 1zm0 27.4a12.34 12.34 0 0 1-6.3-1.72l-.452-.268-4.712 1.08 1.112-4.596-.296-.472A12.4 12.4 0 1 1 16 28.4zm6.8-9.272c-.372-.188-2.204-1.088-2.544-1.212-.34-.124-.588-.188-.836.188-.248.376-.964 1.212-1.18 1.46-.216.248-.436.28-.808.092-.372-.188-1.572-.58-2.996-1.848-1.108-.988-1.856-2.208-2.072-2.58-.216-.372-.024-.572.164-.76.168-.168.372-.436.56-.652.188-.216.248-.372.372-.62.124-.248.062-.464-.032-.652-.092-.188-.836-2.016-1.148-2.76-.3-.724-.608-.624-.836-.636l-.712-.012c-.248 0-.652.092-.992.464-.34.372-1.3 1.272-1.3 3.1 0 1.828 1.332 3.596 1.52 3.844.188.248 2.624 4.008 6.356 5.62.888.384 1.58.612 2.12.784.892.284 1.704.244 2.344.148.716-.108 2.204-.9 2.516-1.768.312-.868.312-1.612.216-1.768-.092-.156-.34-.248-.712-.436z"/></svg>
 </a>
-<div class="wa-tooltip">Chat with us on WhatsApp</div>
+<div class="wa-tooltip">Chat on WhatsApp</div>
 
 <button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
   <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
 </button>
 
-<!-- HOME PAGE -->
+<!-- HOME -->
 <div class="page active page-bg" id="page-home">
   <div class="hero">
     <div>
-      <div class="hero-eyebrow">Anything want toOOOOO put ? — Malaysia</div>
+      <div class="hero-eyebrow">Anything want to put — Malaysia</div>
       <h1>Who <em>We Are</em></h1>
       <p class="hero-desc">Consulting, training and on-site technical support in Radiation Protection, Environmental Health & Safety, ISO Standards, and Industrial Best Practices.</p>
       <div class="hero-actions">
@@ -326,8 +296,8 @@ footer{background:rgba(0,0,0,0.35);padding:40px;border-top:1px solid rgba(255,25
         <div class="hero-card"><div class="hero-card-label">Est.</div><div class="hero-card-val">2017</div><div class="hero-card-sub">Incorporated in Malaysia</div></div>
         <div class="hero-card"><div class="hero-card-label">Scope</div><div class="hero-card-val">4 Fields</div><div class="hero-card-sub">Integrated expertise</div></div>
       </div>
-      <div style="height:10px"></div>
-      <div class="hero-card"><div class="hero-card-label">Sectors Served</div><div class="hero-card-val"> · · Manufacturing · </div></div>
+      <div style="height:8px"></div>
+      <div class="hero-card"><div class="hero-card-label">Sectors Served</div><div class="hero-card-val">Mining · Oil & Gas · Manufacturing · R&D</div></div>
     </div>
   </div>
   <div class="divider"></div>
@@ -336,17 +306,17 @@ footer{background:rgba(0,0,0,0.35);padding:40px;border-top:1px solid rgba(255,25
     <div class="section-title">Our core service areas</div>
     <div class="section-sub">Comprehensive technical support across four specialised disciplines.</div>
     <div class="services-grid">
-      <div class="svc-card"><div class="svc-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg></div><h3>Radiation Protection & Nuclear Safety</h3><p>Regulatory compliance, site assessments, and on-site technical support for nuclear and radioactive facilities.</p></div>
-      <div class="svc-card"><div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><h3>Environmental Health & Safety (EHS)</h3><p>Environmental monitoring, risk assessment, and EHS management system implementation.</p></div>
-      <div class="svc-card"><div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div><h3>ISO Standards & Industrial Standards</h3><p>Consultancy and training for ISO 9001, 14001, 45001 and other management system standards.</p></div>
-      <div class="svc-card"><div class="svc-icon"><svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div><h3>Industrial Best Practices & Sustainable Systems</h3><p>Sustainable system management, NORM waste management, and manufacturing best practices.</p></div>
+      <div class="svc-card"><div class="svc-num">01</div><h3>Radiation Protection & Nuclear Safety</h3><p>Regulatory compliance, site assessments, and on-site technical support for nuclear and radioactive facilities.</p></div>
+      <div class="svc-card"><div class="svc-num">02</div><h3>Environmental Health & Safety (EHS)</h3><p>Environmental monitoring, risk assessment, and EHS management system implementation.</p></div>
+      <div class="svc-card"><div class="svc-num">03</div><h3>ISO Standards & Industrial Standards</h3><p>Consultancy and training for ISO 9001, 14001, 45001 and other management system standards.</p></div>
+      <div class="svc-card"><div class="svc-num">04</div><h3>Industrial Best Practices & Sustainable Systems</h3><p>Sustainable system management, NORM waste management, and manufacturing best practices.</p></div>
     </div>
   </div>
   <div class="stats-band">
     <div class="stats-inner">
       <div class="stat-item"><div class="stat-num">2017</div><div class="stat-label">Year Founded</div></div>
       <div class="stat-item"><div class="stat-num">4+</div><div class="stat-label">Service Disciplines</div></div>
-      <div class="stat-item"><div class="stat-num">2</div><div class="stat-label">International Collaborations</div></div>
+      <div class="stat-item"><div class="stat-num">2</div><div class="stat-label">Collaborations</div></div>
       <div class="stat-item"><div class="stat-num">Gov & Private</div><div class="stat-label">Sectors Served</div></div>
     </div>
   </div>
@@ -362,11 +332,11 @@ footer{background:rgba(0,0,0,0.35);padding:40px;border-top:1px solid rgba(255,25
   <footer><div class="footer-inner"><div><div class="footer-brand">REM Synergy Sdn Bhd</div><div class="footer-copy">© 2026 REM Synergy Sdn Bhd. All rights reserved.</div></div><div class="footer-links"><a onclick="showPage('home')">Home</a><a onclick="showPage('about')">About</a><a onclick="showPage('services')">Services</a><a onclick="showPage('news')">News</a><a onclick="showPage('contact')">Contact</a></div></div></footer>
 </div>
 
-<!-- ABOUT PAGE -->
+<!-- ABOUT -->
 <div class="page page-bg" id="page-about">
   <div class="about-hero"><div class="section-label">Who We Are</div><h1>Technical expertise for<br>a sustainable future</h1><p>REM Synergy Sdn Bhd began as a radiological and environmental consulting company and has grown into a full-spectrum technical services provider for Malaysian industry.</p></div>
   <div class="divider"></div>
-  <div class="about-grid" style="margin-top:40px">
+  <div class="about-grid" style="margin-top:48px">
     <div class="about-body">
       <h2>Our Background</h2>
       <p>REM Synergy Sdn Bhd, formerly known as REM Consultants Sdn Bhd, was incorporated in 2017, initially as a radiological and environmental consulting company. Throughout the years, the company expanded its scope of services to regulatory compliance consultancy and on-site technical support.</p>
@@ -390,29 +360,27 @@ footer{background:rgba(0,0,0,0.35);padding:40px;border-top:1px solid rgba(255,25
   <footer><div class="footer-inner"><div><div class="footer-brand">REM Synergy Sdn Bhd</div><div class="footer-copy">© 2026 REM Synergy Sdn Bhd. All rights reserved.</div></div><div class="footer-links"><a onclick="showPage('home')">Home</a><a onclick="showPage('about')">About</a><a onclick="showPage('services')">Services</a><a onclick="showPage('news')">News</a><a onclick="showPage('contact')">Contact</a></div></div></footer>
 </div>
 
-<!-- SERVICES PAGE -->
+<!-- SERVICES -->
 <div class="page page-bg" id="page-services">
   <div class="services-hero"><div class="section-label">Services</div><h1>What we offer</h1><p>From radiation protection to ISO certification, our team delivers expert consulting, training, and on-site technical support.</p></div>
   <div class="divider"></div>
-  <div style="padding:40px 40px 60px;max-width:1100px;margin:0 auto">
-    <div class="services-full">
-      <div class="svc-row"><div class="svc-left"><div class="svc-num">01</div><h3>Radiation Protection & Nuclear Safety and Security</h3></div><div class="svc-right"><p>Comprehensive consultancy and on-site technical support covering regulatory compliance with national and international nuclear safety standards. We assist facilities in establishing radiation protection programmes, conducting dose assessments, and ensuring physical security for nuclear and radioactive materials.</p><div class="svc-tags"><span class="tag">Dose Assessment</span><span class="tag">Regulatory Compliance</span><span class="tag">Security Systems</span><span class="tag">NORM Management</span></div></div></div>
-      <div class="svc-row"><div class="svc-left"><div class="svc-num">02</div><h3>Environmental Health & Safety (EHS)</h3></div><div class="svc-right"><p>End-to-end EHS management services including environmental monitoring, risk assessments, and development of EHS management systems. We help organisations identify, evaluate, and control environmental and occupational health hazards in compliance with Malaysian regulations.</p><div class="svc-tags"><span class="tag">Environmental Monitoring</span><span class="tag">Risk Assessment</span><span class="tag">EHS Management</span><span class="tag">Regulatory Compliance</span></div></div></div>
-      <div class="svc-row"><div class="svc-left"><div class="svc-num">03</div><h3>ISO Standards & Industrial Standards</h3></div><div class="svc-right"><p>Consultancy and training services for ISO management system standards. We guide organisations through the full implementation cycle — from gap analysis and documentation to internal audits and certification readiness — for ISO 9001, ISO 14001, ISO 45001 and other relevant standards.</p><div class="svc-tags"><span class="tag">ISO 9001</span><span class="tag">ISO 14001</span><span class="tag">ISO 45001</span><span class="tag">Gap Analysis</span><span class="tag">Internal Audit</span></div></div></div>
-      <div class="svc-row"><div class="svc-left"><div class="svc-num">04</div><h3>Industrial Best Practices & Sustainable Systems</h3></div><div class="svc-right"><p>Training and consultancy on sustainable system management and manufacturing best practices aligned with industry and regulatory expectations.</p><div class="svc-tags"><span class="tag">Sustainable Systems</span><span class="tag">Best Practices</span><span class="tag">Training</span><span class="tag">Waste Management</span></div></div></div>
-    </div>
+  <div class="services-full" style="margin-top:0">
+    <div class="svc-row"><div class="svc-left"><div class="svc-num-lg">01</div><h3>Radiation Protection & Nuclear Safety and Security</h3></div><div class="svc-right"><p>Comprehensive consultancy and on-site technical support covering regulatory compliance with national and international nuclear safety standards. We assist facilities in establishing radiation protection programmes, conducting dose assessments, and ensuring physical security for nuclear and radioactive materials.</p><div class="svc-tags"><span class="tag">Dose Assessment</span><span class="tag">Regulatory Compliance</span><span class="tag">Security Systems</span><span class="tag">NORM Management</span></div></div></div>
+    <div class="svc-row"><div class="svc-left"><div class="svc-num-lg">02</div><h3>Environmental Health & Safety (EHS)</h3></div><div class="svc-right"><p>End-to-end EHS management services including environmental monitoring, risk assessments, and development of EHS management systems. We help organisations identify, evaluate, and control environmental and occupational health hazards in compliance with Malaysian regulations.</p><div class="svc-tags"><span class="tag">Environmental Monitoring</span><span class="tag">Risk Assessment</span><span class="tag">EHS Management</span><span class="tag">Regulatory Compliance</span></div></div></div>
+    <div class="svc-row"><div class="svc-left"><div class="svc-num-lg">03</div><h3>ISO Standards & Industrial Standards</h3></div><div class="svc-right"><p>Consultancy and training services for ISO management system standards. We guide organisations through the full implementation cycle — from gap analysis and documentation to internal audits and certification readiness — for ISO 9001, ISO 14001, ISO 45001 and other relevant standards.</p><div class="svc-tags"><span class="tag">ISO 9001</span><span class="tag">ISO 14001</span><span class="tag">ISO 45001</span><span class="tag">Gap Analysis</span><span class="tag">Internal Audit</span></div></div></div>
+    <div class="svc-row"><div class="svc-left"><div class="svc-num-lg">04</div><h3>Industrial Best Practices & Sustainable Systems</h3></div><div class="svc-right"><p>Training and consultancy on sustainable system management and manufacturing best practices aligned with industry and regulatory expectations.</p><div class="svc-tags"><span class="tag">Sustainable Systems</span><span class="tag">Best Practices</span><span class="tag">Training</span><span class="tag">Waste Management</span></div></div></div>
   </div>
   <footer><div class="footer-inner"><div><div class="footer-brand">REM Synergy Sdn Bhd</div><div class="footer-copy">© 2026 REM Synergy Sdn Bhd. All rights reserved.</div></div><div class="footer-links"><a onclick="showPage('home')">Home</a><a onclick="showPage('about')">About</a><a onclick="showPage('services')">Services</a><a onclick="showPage('news')">News</a><a onclick="showPage('contact')">Contact</a></div></div></footer>
 </div>
 
-<!-- NEWS PAGE -->
+<!-- NEWS -->
 <div class="page page-bg" id="page-news">
   <div class="news-hero"><div class="section-label">Latest Updates</div><h1>News & Announcements</h1><p>Stay updated with REM Synergy's latest company announcements, project milestones, and upcoming training programmes.</p></div>
   <div class="divider"></div>
   <div class="news-filters">
     <button class="filter-btn active" onclick="filterNews('all',this)">All</button>
     <button class="filter-btn" onclick="filterNews('announcement',this)">Announcements</button>
-    <button class="filter-btn" onclick="filterNews('project',this)">Project Updates</button>
+    <button class="filter-btn" onclick="filterNews('project',this)">Projects</button>
     <button class="filter-btn" onclick="filterNews('training',this)">Training</button>
   </div>
   <div class="news-grid" id="news-grid">
@@ -430,23 +398,23 @@ footer{background:rgba(0,0,0,0.35);padding:40px;border-top:1px solid rgba(255,25
     </div>
     <div class="news-card" data-cat="project"><div class="news-card-top"><div class="news-meta"><span class="news-badge badge-project">Project Update</span><span class="news-date">April 2026</span></div><h3>Project A</h3><p>Our technical team successfully completed on-site .</p></div><div class="news-card-footer"><span class="news-author">REM Technical Team</span><span class="news-read">Read more →</span></div></div>
     <div class="news-card" data-cat="training"><div class="news-card-top"><div class="news-meta"><span class="news-badge badge-training">Training</span><span class="news-date">March 2026</span></div><h3>Training A — June 2026</h3><p>Upcoming Training A .</p></div><div class="news-card-footer"><span class="news-author">REM Training Division</span><span class="news-read">Register now →</span></div></div>
-    <div class="news-card" data-cat="announcement"><div class="news-card-top"><div class="news-meta"><span class="news-badge badge-announcement">Announcement</span><span class="news-date">February 2026</span></div><h3>REM Synergy renews collaboration agreement with GeoEnergy Consult Germany</h3><p>We have renewed our strategic partnership with GeoEnergy Consult for NORM waste management services, strengthening our capability to serve the oil & gas and mining sectors.</p></div><div class="news-card-footer"><span class="news-author">REM Synergy Management</span><span class="news-read">Read more →</span></div></div>
+    <div class="news-card" data-cat="announcement"><div class="news-card-top"><div class="news-meta"><span class="news-badge badge-announcement">Announcement</span><span class="news-date">February 2026</span></div><h3>REM Synergy renews collaboration with GeoEnergy Consult Germany</h3><p>We have renewed our strategic partnership with GeoEnergy Consult for NORM waste management services.</p></div><div class="news-card-footer"><span class="news-author">REM Synergy Management</span><span class="news-read">Read more →</span></div></div>
     <div class="news-card" data-cat="project"><div class="news-card-top"><div class="news-meta"><span class="news-badge badge-project">Project Update</span><span class="news-date">December 2025</span></div><h3>TRX Integrated Management Systems</h3><p>REM Synergy guided a TRXC client through full IMS implementation covering ISO 9001, ISO 14001, and ISO 45001.</p></div><div class="news-card-footer"><span class="news-author">REM Consulting Team</span><span class="news-read">Read more →</span></div></div>
     <div class="news-card" data-cat="training"><div class="news-card-top"><div class="news-meta"><span class="news-badge badge-training">Training</span><span class="news-date">December 2025</span></div><h3>Training B</h3><p>Upcoming Training B .</p></div><div class="news-card-footer"><span class="news-author">REM Training Division</span><span class="news-read">Read more →</span></div></div>
   </div>
   <footer><div class="footer-inner"><div><div class="footer-brand">REM Synergy Sdn Bhd</div><div class="footer-copy">© 2026 REM Synergy Sdn Bhd. All rights reserved.</div></div><div class="footer-links"><a onclick="showPage('home')">Home</a><a onclick="showPage('about')">About</a><a onclick="showPage('services')">Services</a><a onclick="showPage('news')">News</a><a onclick="showPage('contact')">Contact</a></div></div></footer>
 </div>
 
-<!-- CONTACT PAGE -->
+<!-- CONTACT -->
 <div class="page page-bg" id="page-contact">
   <div class="contact-hero"><div class="section-label">Get In Touch</div><h1>Let's work together</h1><p>Reach out to discuss your compliance, training, or consultancy needs. Our team is ready to assist.</p></div>
   <div class="divider"></div>
-  <div class="contact-grid" style="margin-top:40px">
+  <div class="contact-grid" style="margin-top:48px">
     <div class="contact-info">
-      <div class="contact-item"><div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.44 2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.85a16 16 0 0 0 6 6l.85-.85a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z"/></svg></div><div><h4>Phone</h4><p>+603-6142 3311</p></div></div>
-      <div class="contact-item"><div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><h4>Email</h4><p>admin@remconsult.com.my</p></div></div>
-      <div class="contact-item"><div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><h4>Location</h4><p>43-2, Jalan Cecawi 6/33, Seksyen 6, Kota Damansara, 47810 Petaling Jaya, Selangor, MALAYSIA</p></div></div>
-      <div class="contact-item"><div class="contact-icon"><svg viewBox="0 0 32 32"><path fill="rgba(255,255,255,0.8)" d="M16 1C7.716 1 1 7.716 1 16c0 2.628.672 5.1 1.852 7.256L1 31l7.94-1.82A14.94 14.94 0 0 0 16 31c8.284 0 15-6.716 15-15S24.284 1 16 1zm6.8 18.128c-.372-.188-2.204-1.088-2.544-1.212-.34-.124-.588-.188-.836.188-.248.376-.964 1.212-1.18 1.46-.216.248-.436.28-.808.092-.372-.188-1.572-.58-2.996-1.848-1.108-.988-1.856-2.208-2.072-2.58-.216-.372-.024-.572.164-.76.168-.168.372-.436.56-.652.188-.216.248-.372.372-.62.124-.248.062-.464-.032-.652-.092-.188-.836-2.016-1.148-2.76-.3-.724-.608-.624-.836-.636l-.712-.012c-.248 0-.652.092-.992.464-.34.372-1.3 1.272-1.3 3.1 0 1.828 1.332 3.596 1.52 3.844.188.248 2.624 4.008 6.356 5.62.888.384 1.58.612 2.12.784.892.284 1.704.244 2.344.148.716-.108 2.204-.9 2.516-1.768.312-.868.312-1.612.216-1.768-.092-.156-.34-.248-.712-.436z"/></svg></div><div><h4>WhatsApp</h4><p><a href="https://wa.me/60361423311" target="_blank" style="color:rgba(255,255,255,0.8);text-decoration:none">+603-6142 3311</a></p></div></div>
+      <div class="contact-item"><div><h4>Phone</h4><p>+603-6142 3311</p></div></div>
+      <div class="contact-item"><div><h4>Email</h4><p>admin@remconsult.com.my</p></div></div>
+      <div class="contact-item"><div><h4>Location</h4><p>43-2, Jalan Cecawi 6/33, Seksyen 6, Kota Damansara, 47810 Petaling Jaya, Selangor, MALAYSIA</p></div></div>
+      <div class="contact-item"><div><h4>WhatsApp</h4><p><a href="https://wa.me/60361423311" target="_blank" style="color:var(--ink);text-decoration:none;border-bottom:1px solid var(--stone)">+603-6142 3311</a></p></div></div>
     </div>
     <div class="contact-form">
       <div class="form-row">
@@ -482,8 +450,8 @@ function filterNews(cat,btn){
   document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
   document.querySelectorAll('#news-grid > *').forEach(card=>{
-    if(cat==='all'||card.dataset.cat===card.dataset.cat&&cat===card.dataset.cat||cat==='all'){card.style.display=''}
-    if(cat!=='all'&&card.dataset.cat!==cat){card.style.display='none'}
+    if(cat==='all'||card.dataset.cat===cat){card.style.display=''}
+    else{card.style.display='none'}
   });
 }
 function toggleMenu(){document.getElementById('nav-links').classList.toggle('open')}
